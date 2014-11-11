@@ -1,0 +1,29 @@
+=============================
+ptags - Process Tags
+
+James Sullivan
+=============================
+
+This patch adds the following features to the Linux 2.6.32.60 kernel.
+
+1) PROCESS TAGS
+===============
+-Per process string tags
+-Can be added or removed (see 2) from a process
+-Each process can have an unlimited number of ptags
+-Each tag has a maximum size (PTAG_TAG_MAX);
+-A forked process will have all of its tags copied to the child
+-A dying process will have its tags freed and removed
+
+2) ptag(2)
+==========
+        ptag(unsigned long request, 
+             char *tag,
+             unsigned int tag_len,
+             pid_t pid)
+-System call to add or remove process tags
+-Two operations - PTAG_ADD | PTAG_REMOVE
+-Similar permission model as the kill(2) system call
+        - The owner of a process can modify a process's tags
+        - The priveleged user can modify any process's tags
+
