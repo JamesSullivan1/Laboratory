@@ -1,0 +1,40 @@
+========================================
+starlocks - CCDS (Corporate Caffeine
+    Delivery System)
+
+James Sullivan <sullivan.james.f@gmail.com>
+
+Starlocks is a user-level simulation of a coffee shop that can be
+instantiated in a number of different ways. Each customer is a threads
+(NPTL-style pthreads), and there are a number of service points which
+the customer must enter to have their order processed.
+
+The customers must first enter some type of service queue. This
+can either be a 'standard' queue for a barista/cashier combination.
+or a separate queue for the barista and for self-service coffee pots.
+Each customer is either a simple or complex customer, drawn from a 
+normal distribution. Simple orders can be processed at either type
+of service point but complex orders must go to a barista. 
+
+If there are no self-service points, then there is a single queue
+for all baristas, and customers pay at this queue. If there are some
+self-service points (and by necessity some cashiers), the customers 
+will enter the queue corresponding to their order type, and proceed
+to a second queue to pay once they are finished.
+
+This queueing is supported by a FIFO mutex implementation, in which
+the mutex is released in a strict ordering. This implementation does 
+not impose significant cost, since the threads sleep while they are 
+in the queue and are woken up in order.
+
+========================================
+
+USAGE:
+1) Make the program with `make`.
+1a) Set the variable CHAOS for the MACFO style queueing mechanism.
+    (`make CHAOS=1`)
+2) Run the program with ./starlocks num_cust -s num_self -b num_bar
+    -c num_cash
+3) Alternatively, run all tests with ./all_tests.sh, which will also 
+    log data and perform statistical analysis for each trial size.
+

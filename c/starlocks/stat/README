@@ -1,0 +1,18 @@
+========================================
+Test scripts and statistical analysis 
+scripts for Starlocks
+
+James Sullivan <sullivan.james.f@gmail.com>
+10095183
+
+========================================
+
+USAGE:
+1) Copy the Starlocks binary into this directory.
+2) Run './all_trials.sh' to execute 10 trials in each store mode, for
+    each number of customers.
+3) The raw data will be recorded in a number of files and composed in
+    the 'starlocks.dat' and 'classic.dat' files.
+4) The graphs will be generated as 'starlocks.pdf' and 'classic.pdf'.
+
+
